@@ -18,6 +18,12 @@ class Expresstion(object):
         super(Expresstion, self).__init__()
         self.symbols = list()
 
+    def addSymbol(self, sym):
+        self.symbols.append(sym)
+
+    def size(self):
+        return len(self.symbols)
+
     def __str__(self):
         s = "["
         i = 0
@@ -84,4 +90,8 @@ class Parser(object):
         return pro
 
     def expr(self):
-        pass
+        exp = Expresstion()
+        while self.look.tag != lexer.Tag.SEPERATOR and self.look.tag != lexer.Tag.EOL:
+            exp.addSymbol(self.look)
+            self.move()
+        return exp
