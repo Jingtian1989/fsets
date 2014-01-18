@@ -118,7 +118,5 @@ class Lexer(object):
                 return word
             else:
                 return self.terminals.get(word.lexeme)
-
-
         return None
 
