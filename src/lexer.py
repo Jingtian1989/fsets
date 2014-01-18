@@ -1,4 +1,4 @@
-__author__ = 'ZhngJingTian'
+__author__ = 'ZhngJingtian'
 
 class Tag(object):
     '''Tag'''

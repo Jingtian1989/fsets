@@ -1,4 +1,4 @@
-__author__ = 'ZhangJingTian'
+__author__ = 'ZhangJingtian'
 import lexer
 class Parser(object):
     '''Parser'''
