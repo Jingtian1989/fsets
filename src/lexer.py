@@ -24,7 +24,7 @@ class Word(Tag):
         else:
             return str(self.lexeme)
 
-Word.EPSILON    = Word(Tag.EPSILON, '\xa6\xc5')
+Word.EPSILON    = Word(Tag.EPSILON, 'ε')
 Word.EOL        = Word(Tag.EOL, '\n')
 Word.GENERATOR  = Word(Tag.GENERATOR, '->')
 Word.SEPERATOR  = Word(Tag.SEPERATOR, '|')
@@ -61,11 +61,6 @@ class Lexer(object):
         else:
             return False
 
-    def isEpsilon(self, c):
-        if c != None and c == Word.EPSILON.lexeme:
-            return True
-        else:
-            return False
 
     def error(self, s):
         raise Exception("lexer error : %s, at line %d."%(s,Lexer.line))
@@ -89,7 +84,7 @@ class Lexer(object):
             self.__readchar()
             return Word.SEPERATOR
 
-        if self.isEpsilon(self.peek):
+        if self.peek == 'ε':
             self.__readchar()
             return Word.EPSILON
 
