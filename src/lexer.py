@@ -18,6 +18,11 @@ class Word(Tag):
     def __init__(self, tag, lexeme):
         super(Word, self).__init__(tag)
         self.lexeme = lexeme
+    def __str__(self):
+        if self.tag == Tag.TERMINAL:
+            return "'" + self.lexeme + "'"
+        else:
+            return str(self.lexeme)
 
 Word.EPSILON    = Word(Tag.EPSILON, '\xa6\xc5')
 Word.EOL        = Word(Tag.EOL, '\n')
