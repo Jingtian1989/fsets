@@ -76,10 +76,6 @@ class Parser(object):
         word = self.look
         self.match(lexer.Tag.NONTERMINAL)
         pro = Production(word)
-        if self.pros.get(str(pro)) == None:
-            self.pros[str(pro)] = pro
-        else:
-            pro = self.pros.get(str(pro))
         self.match(lexer.Tag.GENERATOR)
         exp = self.expr()
         pro.addExpression(exp)
@@ -95,3 +91,10 @@ class Parser(object):
             exp.addSymbol(self.look)
             self.move()
         return exp
+
+if __name__ == '__main__':
+    text = "E   ->  E '+' T | T \n"
+    lex = lexer.Lexer(text)
+    par = Parser(lex)
+    par.parse()
+    print("ok")

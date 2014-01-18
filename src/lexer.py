@@ -76,6 +76,7 @@ class Lexer(object):
 
         if self.peek == '\n':
             Lexer.line = Lexer.line + 1
+            self.__readchar()
             return Word.EOL
 
         if self.peek == '-':
@@ -84,7 +85,12 @@ class Lexer(object):
             else:
                 self.error("incomplete symbol ->.")
 
+        if self.peek == '|':
+            self.__readchar()
+            return Word.SEPERATOR
+
         if self.isEpsilon(self.peek):
+            self.__readchar()
             return Word.EPSILON
 
         if self.isCharacter(self.peek):
@@ -105,17 +111,14 @@ class Lexer(object):
             while self.peek != '\'':
                 s = s + self.peek
                 self.__readchar()
-            if self.__readcharc('\''):
-                word =  Word(Tag.TERMINAL, s)
-                if self.terminals.get(word.lexeme) == None:
-                    self.terminals[word.lexeme] = word
-                    return word
-                else:
-                    return self.terminals.get(word.lexeme)
+            self.__readchar()
+            word =  Word(Tag.TERMINAL, s)
+            if self.terminals.get(word.lexeme) == None:
+                self.terminals[word.lexeme] = word
+                return word
             else:
-                self.error("incomplete terminal")
-        if self.peek == '|':
-            return Word.SEPERATOR
+                return self.terminals.get(word.lexeme)
+
 
         return None
 
